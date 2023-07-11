@@ -1,5 +1,17 @@
-import * as mfm from 'https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/index.min.js';
-
+import * as mfm from 'https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/index.js';
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/index.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/api.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/node.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/internal/parser.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/internal/util.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/internal/index.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@2022.7.21-dev.1/built/internal/core/index.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/index.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/api.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/node.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/internal/index.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/internal/parser.js";
+import * from "https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/internal/util.js";
 const inputText =
     `<center>
 Hello $[tada everynan! :tada:]
