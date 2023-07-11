@@ -1,5 +1,5 @@
 import * as M from '../index.ts';
-import * as P from './core.ts';
+import * as P from './core/index.ts';
 import { mergeText } from './util.ts';
 
 type ArgPair = { k: string, v: string | true };
