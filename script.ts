@@ -1,4 +1,4 @@
-import {parse} from 'https://cdn.jsdelivr.net/npm/mfm-js@0.23.3/built/index.js';
+import {parse} from 'index.ts';
 const inputText =
     `<center>
 Hello $[tada everynan! :tada:]
