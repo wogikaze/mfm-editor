@@ -1,0 +1,67 @@
+<!--wogikaze,2023-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MFM editor</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <textarea id="in" spellcheck="false"></textarea>
+    <div id="out"></div>
+    
+</body>
+
+</html>
+<script>
+    const input = document.getElementById("in");
+    const output = document.getElementById("out");
+    input.addEventListener("input", e => {
+        output.innerText = e.target.value;
+    });
+
+
+
+
+
+</script>
+<style>
+    body {
+        padding: 2rem;
+        min-height: 80vh;
+    }
+
+    textarea {
+        width: 100%;
+        max-width: calc(100vw - 4rem - 40px);
+        min-height: 40vh;
+        max-height: calc(100vh - 4rem - 32px);
+        padding: 16px 20px;
+        outline: 1px solid sandybrown;
+        border-radius: 8px;
+        font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        resize: none;
+    }
+
+    textarea:focus-visible {
+        outline: 2px solid saddlebrown;
+    }
+
+    #out {
+        width: 100%;
+        max-width: calc(100vw - 4rem - 40px);
+        min-height: 40vh;
+        max-height: calc(100vh - 4rem - 32px);
+        padding: 16px 20px;
+        outline: 1px solid sandybrown;
+        border-radius: 8px;
+        font-family: Hiragino Maru Gothic Pro, BIZ UDGothic, Roboto, HelveticaNeue, Arial, sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        background-color: #f0f0f0;
+    }
+</style>
