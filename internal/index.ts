@@ -1,7 +1,7 @@
-import * as M from '../index.ts';
+import * as M from '../.ts';
 import { language } from './parser.ts';
 import { mergeText } from './util.ts';
-import * as P from './core.ts';
+import * as P from './core/index.ts';
 
 export type FullParserOpts = {
 	fnNameList?: string[];
