@@ -1,4 +1,4 @@
-import * as mfm from "https://github.com/misskey-dev/mfm.js/raw/develop/src/index.ts"
+import * as mfm from 'https://github.com/misskey-dev/mfm.js/raw/develop/src/index'
 const inputText = 
 `<center>
 Hello $[tada everynan! :tada:]
