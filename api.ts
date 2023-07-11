@@ -1,6 +1,6 @@
-import { fullParser, simpleParser } from './internal';
-import { inspectOne, stringifyNode, stringifyTree } from './internal/util';
-import { MfmNode, MfmSimpleNode } from './node';
+import { fullParser, simpleParser } from './internal/index.ts';
+import { inspectOne, stringifyNode, stringifyTree } from './internal/util.ts';
+import { MfmNode, MfmSimpleNode } from './node.ts';
 
 /**
  * Generates a MfmNode tree from the MFM string.

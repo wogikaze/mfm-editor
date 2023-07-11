@@ -1,4 +1,4 @@
-import { isMfmBlock, MfmInline, MfmNode, MfmText, TEXT } from '../node';
+import { isMfmBlock, MfmInline, MfmNode, MfmText, TEXT } from '../node.ts';
 
 export function mergeText<T extends MfmNode>(nodes: ((T extends MfmInline ? MfmInline : MfmNode) | string)[]): (T | MfmText)[] {
 	const dest: (T | MfmText)[] = [];
