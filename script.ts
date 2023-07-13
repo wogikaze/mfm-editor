@@ -1,4 +1,4 @@
-import {parse} from './index.ts';
+import {parse,parseSimple,toString} from './index.ts';
 const inputText =
     `<center>
 Hello $[tada everynan! :tada:]
