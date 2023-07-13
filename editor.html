@@ -62,8 +62,8 @@
                 if (!result.success) {
                     return result;
                 }
-                const text = input.slice(index, result.index);
-                return success(result.index, text);
+                const text2 = input.slice(index, result.index);
+                return success(result.index, text2);
             });
         }
         many(min) {
@@ -118,8 +118,8 @@
     function regexp(pattern) {
         const re = RegExp(`^(?:${pattern.source})`, pattern.flags);
         return new Parser((input, index, _state) => {
-            const text = input.slice(index);
-            const result = re.exec(text);
+            const text2 = input.slice(index);
+            const result = re.exec(text2);
             if (result == null) {
                 return failure();
             }
@@ -223,6 +223,10 @@
     }
 
     // remote-resource:https://raw.githubusercontent.com/JPCC-p/editor/master/node.ts
+    var blockTypes = ["quote", "search", "blockCode", "mathBlock", "center"];
+    function isMfmBlock(node) {
+        return blockTypes.includes(node.type);
+    }
     var QUOTE = (children) => {
         return { type: "quote", children };
     };
@@ -280,8 +284,8 @@
     var FN = (name, args, children) => {
         return { type: "fn", props: { name, args }, children };
     };
-    var PLAIN = (text) => {
-        return { type: "plain", children: [TEXT(text)] };
+    var PLAIN = (text2) => {
+        return { type: "plain", children: [TEXT(text2)] };
     };
     var TEXT = (value) => {
         return { type: "text", props: { text: value } };
@@ -311,12 +315,122 @@
         generateText();
         return dest;
     }
+    function stringifyNode(node) {
+        switch (node.type) {
+            case "quote": {
+                return stringifyTree(node.children).split("\n").map((line) => `> ${line}`).join("\n");
+            }
+            case "search": {
+                return node.props.content;
+            }
+            case "blockCode": {
+                return `\`\`\`${node.props.lang ?? ""}
+${node.props.code}
+\`\`\``;
+            }
+            case "mathBlock": {
+                return `\\[
+${node.props.formula}
+\\]`;
+            }
+            case "center": {
+                return `<center>
+${stringifyTree(node.children)}
+</center>`;
+            }
+            case "emojiCode": {
+                return `:${node.props.name}:`;
+            }
+            case "unicodeEmoji": {
+                return node.props.emoji;
+            }
+            case "bold": {
+                return `**${stringifyTree(node.children)}**`;
+            }
+            case "small": {
+                return `<small>${stringifyTree(node.children)}</small>`;
+            }
+            case "italic": {
+                return `<i>${stringifyTree(node.children)}</i>`;
+            }
+            case "strike": {
+                return `~~${stringifyTree(node.children)}~~`;
+            }
+            case "inlineCode": {
+                return `\`${node.props.code}\``;
+            }
+            case "mathInline": {
+                return `\\(${node.props.formula}\\)`;
+            }
+            case "mention": {
+                return node.props.acct;
+            }
+            case "hashtag": {
+                return `#${node.props.hashtag}`;
+            }
+            case "url": {
+                if (node.props.brackets) {
+                    return `<${node.props.url}>`;
+                } else {
+                    return node.props.url;
+                }
+            }
+            case "link": {
+                const prefix = node.props.silent ? "?" : "";
+                return `${prefix}[${stringifyTree(node.children)}](${node.props.url})`;
+            }
+            case "fn": {
+                const argFields = Object.keys(node.props.args).map((key) => {
+                    const value = node.props.args[key];
+                    if (value === true) {
+                        return key;
+                    } else {
+                        return `${key}=${value}`;
+                    }
+                });
+                const args = argFields.length > 0 ? "." + argFields.join(",") : "";
+                return `$[${node.props.name}${args} ${stringifyTree(node.children)}]`;
+            }
+            case "plain": {
+                return `<plain>
+${stringifyTree(node.children)}
+</plain>`;
+            }
+            case "text": {
+                return node.props.text;
+            }
+        }
+        throw new Error("unknown mfm node");
+    }
     var stringifyState;
     (function (stringifyState2) {
         stringifyState2[stringifyState2["none"] = 0] = "none";
         stringifyState2[stringifyState2["inline"] = 1] = "inline";
         stringifyState2[stringifyState2["block"] = 2] = "block";
     })(stringifyState || (stringifyState = {}));
+    function stringifyTree(nodes) {
+        const dest = [];
+        let state = 0;
+        for (const node of nodes) {
+            let pushLf = true;
+            if (isMfmBlock(node)) {
+                if (state === 0) {
+                    pushLf = false;
+                }
+                state = 2;
+            } else {
+                if (state === 0 || state === 1) {
+                    pushLf = false;
+                }
+                state = 1;
+            }
+            if (pushLf) {
+                dest.push(TEXT("\n"));
+            }
+            dest.push(node);
+        }
+        return dest.map((n) => stringifyNode(n)).join("");
+    }
 
     // remote-resource:https://raw.githubusercontent.com/JPCC-p/editor/master/internal/parser.ts
     var space = regexp(/[\u0020\u3000\t]/);
@@ -954,8 +1068,8 @@
                 if (!result.success) {
                     return failure();
                 }
-                const text = result.value.slice(1, result.value.length - 1);
-                return success(result.index, N_URL(text, true));
+                const text2 = result.value.slice(1, result.value.length - 1);
+                return success(result.index, N_URL(text2, true));
             });
         },
         search: (r) => {
@@ -997,6 +1111,10 @@
         });
         return mergeText(result.value);
     }
+    function simpleParser(input) {
+        const result = language.simpleParser.handler(input, 0, {});
+        return mergeText(result.value);
+    }
 
     // remote-resource:https://raw.githubusercontent.com/JPCC-p/editor/master/api.ts
     function parse(input, opts = {}) {
@@ -1007,7 +1125,17 @@
         });
         return nodes;
     }
-
+    function parseSimple(input) {
+        const nodes = simpleParser(input);
+        return nodes;
+    }
+    function toString(node) {
+        if (Array.isArray(node)) {
+            return stringifyTree(node);
+        } else {
+            return stringifyNode(node);
+        }
+    }
 
     // <stdin>
     var inputText = `<center>
