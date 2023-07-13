@@ -10,7 +10,7 @@ https://google.com/
 const mfmTree = parse(inputText);
 console.log(mfmTree);
 // Generate a MFM tree from the simple MFM text.
-// const simpleMfmTree = mfm.parseSimple('I like the hot soup :soup:');
-// console.log(simpleMfmTree);
-// // Reverse to a MFM text from the MFM tree.
-// const text = mfm.toString(mfmTree);
+const simpleMfmTree = parseSimple('I like the hot soup :soup:');
+console.log(simpleMfmTree);
+// Reverse to a MFM text from the MFM tree.
+const text = toString(mfmTree);

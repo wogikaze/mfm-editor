@@ -1015,8 +1015,11 @@ Hello $[tada everynan! :tada:😊]
 @ai
 https://google.com/
 </center>`;
-    var mfmTree = parse(inputText);
+    var mfmTree = parse(inputText, {
+        fnNameList: ['tada', 'jelly', 'twitch', 'shake', 'spin', 'jump', 'bounce', 'flip', 'x2', 'x3', 'x4', 'scale', 'position', 'fg', 'bg', 'font', 'blur', 'rainbow', 'sparkle', 'rotate']
+    });
     console.log(mfmTree);
+
     const input = document.getElementById("in");
     const output = document.getElementById("out");
     input.addEventListener("input", e => {
@@ -1024,7 +1027,7 @@ https://google.com/
         output.innerText = input_text;
         console.log(parse(input_text))
 
-        console.log()
+        console.log(parsesimple())
     });
 
 
