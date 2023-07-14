@@ -1,4 +1,4 @@
-import { intersperse } from '@/misc/prelude/array.js';
+import { intersperse } from './misc/array.js';
 import type { IMentionedRemoteUsers } from '@/models/entities/Note.js';
 import type * as mfm from 'mfm-js';
 
