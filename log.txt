@@ -24,3 +24,11 @@ Content-Length: 52
 Content-Length: 64
 
 {"jsonrpc":"2.0","method":"$/setTrace","params":{"value":"off"}}
+{ header: Map(1) { 'Content-Length' => '64' }, body: '' }
+{
+  header: Map(1) { 'Content-Length' => '64' },
+  body: '{"jsonrpc":"2.0","method":"$/setTrace","params":{"value":"off"}}'
+}
+Content-Length: 64
+
+{"jsonrpc":"2.0","method":"$/setTrace","params":{"value":"off"}}
