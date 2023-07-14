@@ -1,4 +1,3 @@
-import { Window } from 'https://raw.githubusercontent.com/capricorn86/happy-dom/raw/master/packages/happy-dom/src/index.ts';
 import { intersperse } from '@/misc/prelude/array.js';
 import type { IMentionedRemoteUsers } from '@/models/entities/Note.js';
 import type * as mfm from 'mfm-js';
@@ -7,8 +6,6 @@ export function toHtml(nodes: mfm.MfmNode[] | null, mentionedRemoteUsers: IMenti
     if (nodes == null) {
         return null;
     }
-
-    const { window } = new Window();
 
     const doc = window.document;
 
