@@ -1,4 +1,4 @@
-import { Window } from 'https://github.com/capricorn86/happy-dom/raw/master/packages/happy-dom/src/index.ts';
+import { Window } from 'https://raw.githubusercontent.com/capricorn86/happy-dom/raw/master/packages/happy-dom/src/index.ts';
 import { intersperse } from '@/misc/prelude/array.js';
 import type { IMentionedRemoteUsers } from '@/models/entities/Note.js';
 import type * as mfm from 'mfm-js';
